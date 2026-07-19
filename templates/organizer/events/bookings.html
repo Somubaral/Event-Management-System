@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header">
+            Event Bookings
+        </div>
+
+        <div class="card-body">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>User</th>
+                        <th>Tickets</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for booking in bookings %}
+
+                    <tr>
+
+                        <td>
+                            {{ booking.user.username }}
+                        </td>
+
+                        <td>
+                            {{ booking.quantity }}
+                        </td>
+
+                        <td>
+                            {{ booking.status }}
+                        </td>
+
+                        <td>
+                            ₹{{ booking.total_amount }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

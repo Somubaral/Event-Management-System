@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Event
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header">
+
+            Edit Event
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label>Title</label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ event.title }}"
+                        class="form-control"
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Description</label>
+
+                    <textarea
+                        name="description"
+                        class="form-control"
+                    >{{ event.description }}</textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Update Event
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

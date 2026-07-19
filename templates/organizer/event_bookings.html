@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Event Bookings
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>
+        {{ event.title }} Bookings
+    </h2>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-body">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>User</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for booking in bookings %}
+
+                    <tr>
+
+                        <td>
+                            {{ booking.user.username }}
+                        </td>
+
+                        <td>
+                            {{ booking.ticket_category.name }}
+                        </td>
+
+                        <td>
+                            {{ booking.quantity }}
+                        </td>
+
+                        <td>
+                            ₹{{ booking.total_amount }}
+                        </td>
+
+                        <td>
+                            {{ booking.status }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5">
+                            No bookings found
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

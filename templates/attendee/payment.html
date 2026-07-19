@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Payment
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+```
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white">
+
+                Dummy Payment Gateway
+
+            </div>
+
+            <div class="card-body">
+
+                <h4>
+                    Booking #{{ booking.id }}
+                </h4>
+
+                <hr>
+
+                <p>
+
+                    Event:
+                    <strong>
+                        {{ booking.event.title }}
+                    </strong>
+
+                </p>
+
+                <p>
+
+                    Amount:
+                    <strong>
+                        ₹{{ booking.total_amount }}
+                    </strong>
+
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <button
+                        name="payment_result"
+                        value="SUCCESS"
+                        class="btn btn-success w-100 mb-3"
+                    >
+                        Simulate Payment Success
+                    </button>
+
+                    <button
+                        name="payment_result"
+                        value="FAILED"
+                        class="btn btn-danger w-100"
+                    >
+                        Simulate Payment Failure
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

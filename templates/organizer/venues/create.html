@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Venue
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header">
+
+            Create Venue
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label>
+                        Venue Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>
+                        Address
+                    </label>
+
+                    <textarea
+                        name="address"
+                        class="form-control"
+                        required
+                    ></textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>
+                        Capacity
+                    </label>
+
+                    <input
+                        type="number"
+                        name="capacity"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success"
+                >
+                    Create Venue
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

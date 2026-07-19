@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+Payment Success
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+```
+<div class="card shadow border-success">
+
+    <div class="card-body text-center">
+
+        <h1 class="text-success">
+
+            Payment Successful
+
+        </h1>
+
+        <hr>
+
+        <p>
+
+            Ticket Generated Successfully
+
+        </p>
+
+        <h4>
+
+            Ticket Code
+
+        </h4>
+
+        <div class="alert alert-success">
+
+            <strong>
+                {{ ticket.ticket_code }}
+            </strong>
+
+        </div>
+
+        <a
+            href="/my-tickets/"
+            class="btn btn-primary"
+        >
+            View My Tickets
+        </a>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

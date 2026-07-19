@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ticket Categories
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <h2>
+            {{ event.title }} Tickets
+        </h2>
+
+        <a
+            href="/organizer/event/{{ event.id }}/tickets/create/"
+            class="btn btn-primary"
+        >
+            Add Category
+        </a>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Available</th>
+                        <th>Sold</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for category in categories %}
+
+                    <tr>
+
+                        <td>
+                            {{ category.name }}
+                        </td>
+
+                        <td>
+                            ₹{{ category.price }}
+                        </td>
+
+                        <td>
+                            {{ category.total_quantity }}
+                        </td>
+
+                        <td>
+                            {{ category.available_quantity }}
+                        </td>
+
+                        <td>
+                            {{ category.total_quantity|add:"-"|add:category.available_quantity }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5">
+                            No ticket categories found.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ticket Categories
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <h2>
+            Ticket Categories
+        </h2>
+
+        <a
+            href="/organizer/event/{{ event.id }}/tickets/create/"
+            class="btn btn-success"
+        >
+            Add Category
+        </a>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Total Qty</th>
+                        <th>Available</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for category in categories %}
+
+                    <tr>
+
+                        <td>
+                            {{ category.name }}
+                        </td>
+
+                        <td>
+                            ₹{{ category.price }}
+                        </td>
+
+                        <td>
+                            {{ category.total_quantity }}
+                        </td>
+
+                        <td>
+                            {{ category.available_quantity }}
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="/organizer/ticket-category/{{ category.id }}/edit/"
+                                class="btn btn-primary btn-sm"
+                            >
+                                Edit
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Booking Created
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+```
+<div class="card shadow">
+
+    <div class="card-body text-center">
+
+        <h2 class="text-success">
+
+            Booking Created Successfully
+
+        </h2>
+
+        <hr>
+
+        <p>
+
+            Booking ID:
+            <strong>
+                #{{ booking.id }}
+            </strong>
+
+        </p>
+
+        <p>
+
+            Event:
+            <strong>
+                {{ booking.event.title }}
+            </strong>
+
+        </p>
+
+        <p>
+
+            Category:
+            <strong>
+                {{ booking.ticket_category.name }}
+            </strong>
+
+        </p>
+
+        <p>
+
+            Quantity:
+            <strong>
+                {{ booking.quantity }}
+            </strong>
+
+        </p>
+
+        <p>
+
+            Amount:
+            <strong>
+                ₹{{ booking.total_amount }}
+            </strong>
+
+        </p>
+
+        <a
+            href="{% url 'payment-page' booking.id %}"
+            class="btn btn-primary btn-lg mt-3"
+        >
+            Proceed To Payment
+        </a>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

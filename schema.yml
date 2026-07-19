@@ -1,0 +1,393 @@
+openapi: 3.0.3
+info:
+  title: Event Management System API
+  version: 1.0.0
+  description: Backend API for Event Ticketing Platform
+paths:
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/auth/me/:
+    get:
+      operationId: auth_me_retrieve
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/auth/register/:
+    post:
+      operationId: auth_register_create
+      description: "\n    Register a new user.\n\n    Roles:\n    - ORGANIZER\n    -
+        ATTENDEE\n    "
+      summary: Register User
+      tags:
+      - Authentication
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/bookings/:
+    post:
+      operationId: bookings_create
+      description: "\n    Creates a booking and reserves tickets.\n\n    Prevents:\n
+        \   - Overselling\n    - Negative inventory\n    "
+      summary: Create Booking
+      tags:
+      - Bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/bookings/{id}/:
+    get:
+      operationId: bookings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/bookings/my-bookings/:
+    get:
+      operationId: bookings_my_bookings_retrieve
+      tags:
+      - bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/events/:
+    get:
+      operationId: events_retrieve
+      summary: List Events
+      tags:
+      - Events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: events_create
+      description: "\n    Create an event.\n\n    Rules:\n\n    - Future date only\n
+        \   - Venue must not overlap\n    - Only organizers allowed\n    "
+      summary: Create Event
+      tags:
+      - Events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/events/{id}/:
+    get:
+      operationId: events_retrieve_2
+      summary: List Events
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - Events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/events/{id}/cancel/:
+    patch:
+      operationId: events_cancel_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/events/{id}/update/:
+    put:
+      operationId: events_update_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/events/my-events/:
+    get:
+      operationId: events_my_events_retrieve
+      tags:
+      - events
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/payments/process/:
+    post:
+      operationId: payments_process_create
+      description: "\n    Dummy Payment API\n\n    Supports:\n\n    SUCCESS\n    FAILED\n
+        \   "
+      summary: Process Payment
+      tags:
+      - Payments
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/payments/retry/:
+    post:
+      operationId: payments_retry_create
+      summary: Retry Failed Payment
+      tags:
+      - Payments
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/{id}/update/:
+    put:
+      operationId: tickets_update_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/details/{ticket_code}/:
+    get:
+      operationId: tickets_details_retrieve
+      parameters:
+      - in: path
+        name: ticket_code
+        schema:
+          type: string
+        required: true
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/event/{event_id}/:
+    post:
+      operationId: tickets_event_create
+      parameters:
+      - in: path
+        name: event_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/event/{event_id}/list/:
+    get:
+      operationId: tickets_event_list_retrieve
+      parameters:
+      - in: path
+        name: event_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/my-tickets/:
+    get:
+      operationId: tickets_my_tickets_retrieve
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/tickets/verify/{ticket_code}/:
+    get:
+      operationId: tickets_verify_retrieve
+      parameters:
+      - in: path
+        name: ticket_code
+        schema:
+          type: string
+        required: true
+      tags:
+      - tickets
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/venues/:
+    get:
+      operationId: venues_retrieve
+      tags:
+      - venues
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: venues_create
+      tags:
+      - venues
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/venues/{id}/:
+    get:
+      operationId: venues_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - venues
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

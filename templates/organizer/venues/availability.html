@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+Venue Availability
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header">
+
+            Check Venue Availability
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label>
+                        Venue
+                    </label>
+
+                    <select
+                        name="venue_id"
+                        class="form-control"
+                    >
+
+                        {% for venue in venues %}
+
+                        <option value="{{ venue.id }}">
+                            {{ venue.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>
+                        Start Time
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        name="start_time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>
+                        End Time
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        name="end_time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Check
+                </button>
+
+            </form>
+
+            {% if checked %}
+
+                <hr>
+
+                {% if available %}
+
+                    <div class="alert alert-success">
+
+                        Venue Available
+
+                    </div>
+
+                {% else %}
+
+                    <div class="alert alert-danger">
+
+                        Venue Already Occupied
+
+                    </div>
+
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

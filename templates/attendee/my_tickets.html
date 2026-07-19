@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Tickets
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+```
+<h2 class="mb-4">
+    My Tickets
+</h2>
+
+<div class="row">
+
+    {% for ticket in tickets %}
+
+    <div class="col-md-6 mb-4">
+
+        <div class="card shadow-lg border-success">
+
+            <div class="card-header bg-success text-white">
+
+                Event Ticket
+
+            </div>
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+
+                    {{ ticket.booking.event.title }}
+
+                </h5>
+
+                <hr>
+
+                <p>
+
+                    <strong>
+                        Ticket Code:
+                    </strong>
+
+                </p>
+
+                <div class="alert alert-success">
+
+                    <h5 class="mb-0">
+
+                        {{ ticket.ticket_code }}
+
+                    </h5>
+
+                </div>
+
+                <p>
+
+                    <strong>
+                        Issued At:
+                    </strong>
+
+                    {{ ticket.issued_at }}
+
+                </p>
+
+                <p>
+
+                    <strong>
+                        Status:
+                    </strong>
+
+                    {% if ticket.is_valid %}
+
+                    <span class="badge bg-success">
+                        Valid
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-danger">
+                        Invalid
+                    </span>
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+
+        <div class="alert alert-warning">
+
+            No tickets available.
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+```
+
+</div>
+
+{% endblock %}

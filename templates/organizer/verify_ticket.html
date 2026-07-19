@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+Verify Ticket
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+```
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-success text-white">
+
+                Verify Ticket
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Ticket Code
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="ticket_code"
+                            class="form-control"
+                            placeholder="TKT-XXXXXXXXXX"
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success w-100"
+                    >
+                        Verify Ticket
+                    </button>
+
+                </form>
+
+                {% if ticket %}
+
+                <hr>
+
+                <div class="alert alert-success mt-3">
+
+                    <h5>
+
+                        Ticket Verified
+
+                    </h5>
+
+                    <p>
+
+                        Event:
+                        {{ ticket.booking.event.title }}
+
+                    </p>
+
+                    <p>
+
+                        User:
+                        {{ ticket.booking.user.username }}
+
+                    </p>
+
+                    <p>
+
+                        Code:
+                        {{ ticket.ticket_code }}
+
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

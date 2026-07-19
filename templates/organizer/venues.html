@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Venues
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between">
+
+        <h2>Manage Venues</h2>
+
+        <a
+            href="/organizer/venues/create/"
+            class="btn btn-primary"
+        >
+            Create Venue
+        </a>
+
+    </div>
+
+    <hr>
+
+    <div id="venues-container">
+
+    </div>
+
+</div>
+
+<script src="/static/js/auth/api.js"></script>
+<script src="/static/js/venues.js"></script>
+
+{% endblock %}

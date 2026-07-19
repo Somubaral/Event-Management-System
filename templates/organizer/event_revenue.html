@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Revenue
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>
+        Revenue Report
+    </h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4>
+                {{ event.title }}
+            </h4>
+
+            <hr>
+
+            <h5>
+                Total Revenue
+            </h5>
+
+            <h2>
+                ₹{{ revenue }}
+            </h2>
+
+            <h5 class="mt-4">
+                Total Bookings
+            </h5>
+
+            <h2>
+                {{ booking_count }}
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

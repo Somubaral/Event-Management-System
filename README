@@ -1,0 +1,422 @@
+# Event Management System
+
+A Django-based Event Management System that allows organizers to create and manage events, attendees to book tickets, and administrators to monitor platform activities.
+
+## Features
+
+### Authentication & Authorization
+
+* User registration and login
+* Role-based access control
+
+  * Admin
+  * Organizer
+  * Attendee
+* JWT authentication for APIs
+
+### Event Management
+
+* Create, update, and cancel events
+* Venue availability checking
+* Venue conflict validation
+* Event status management
+
+### Booking System
+
+* Event ticket booking
+* Booking confirmation
+* Booking history
+* Booking management
+
+### Payment Management
+
+* Payment processing
+* Payment confirmation
+* Payment tracking
+
+### Ticket Management
+
+* Automatic ticket generation
+* Ticket validation
+* Ticket cancellation on event cancellation
+
+### Organizer Dashboard
+
+* View created events
+* Monitor bookings
+* Revenue tracking
+* Booking analytics
+
+### REST API
+
+* Django REST Framework integration
+* Swagger/OpenAPI documentation
+* Secure API endpoints
+
+---
+
+# Technology Stack
+
+* Python
+* Django
+* Django REST Framework
+* SQLite (Default Database)
+* Bootstrap
+* Swagger / drf-yasg
+
+---
+
+# Installation
+
+## 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd event-management-system
+```
+
+## 2. Create a Virtual Environment
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Apply Database Migrations
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## 5. Create a Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+## 6. Run the Development Server
+
+```bash
+python manage.py runserver
+```
+
+Application will be available at:
+
+```text
+http://127.0.0.1:8000/
+```
+
+---
+
+# API Documentation
+
+Swagger UI:
+
+```text
+http://127.0.0.1:8000/swagger/
+```
+
+ReDoc:
+
+```text
+http://127.0.0.1:8000/redoc/
+```
+
+---
+
+# Project Structure
+
+```text
+event_management/
+│
+├── accounts/
+├── events/
+├── bookings/
+├── payments/
+├── tickets/
+├── venues/
+├── organizer/
+├── attendee/
+├── templates/
+├── static/
+├── media/
+│
+├── manage.py
+└── requirements.txt
+```
+
+---
+
+# Default User Roles
+
+### Admin
+
+* Manage users
+* Monitor events
+* View system data
+
+### Organizer
+
+* Create and manage events
+* Track bookings
+* View revenue reports
+
+### Attendee
+
+* Browse events
+* Book tickets
+* View bookings and tickets
+
+---
+
+# Running Tests
+
+```bash
+python manage.py runserver
+```
+and click on the link in the terminal ( http://127.0.0.1:8000/)
+
+---
+
+# UI Testing Guide
+
+After running the application, open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+## 1. User Registration & Login
+
+### Test Steps
+
+1. Open the Registration page.
+2. Create a new account.
+3. Log in using the registered credentials.
+
+### Expected Result
+
+* User account is created successfully.
+* Login redirects the user to the appropriate dashboard.
+
+---
+
+## 2. Venue Availability Check
+
+### Test Steps
+
+1. Log in as an Organizer.
+2. Navigate to **Check Venue Availability**.
+3. Select a venue.
+4. Enter a start date/time and end date/time.
+5. Submit the form.
+
+### Expected Result
+
+* System displays whether the venue is available.
+* If another event exists in the same time slot, the venue is marked unavailable.
+
+---
+
+## 3. Create Event
+
+### Test Steps
+
+1. Log in as an Organizer.
+2. Navigate to **Create Event**.
+3. Enter:
+
+   * Event Title
+   * Description
+   * Venue
+   * Start Date & Time
+   * End Date & Time
+4. Submit the form.
+
+### Expected Result
+
+* Event is created successfully.
+* User is redirected to the Organizer Dashboard.
+* Newly created event appears in the event list.
+
+### Validation Checks
+
+* Past dates are rejected.
+* End time must be later than start time.
+* Venue conflicts are prevented.
+
+---
+
+## 4. Organizer Dashboard
+
+### Test Steps
+
+1. Open the Organizer Dashboard.
+
+### Expected Result
+
+* Created events are displayed.
+* Event details are visible.
+* Dashboard loads without errors.
+
+---
+
+## 5. View Event Bookings
+
+### Test Steps
+
+1. Select an event from the Organizer Dashboard.
+2. Open the Bookings page.
+
+### Expected Result
+
+* All bookings for that event are displayed.
+
+---
+
+## 6. Browse Events
+
+### Test Steps
+
+1. Log in as an Attendee.
+2. Open the Events page.
+
+### Expected Result
+
+* Active events are displayed.
+* Event information is visible.
+
+---
+
+## 7. Book an Event
+
+### Test Steps
+
+1. Select an available event.
+2. Click Book Event.
+3. Complete the booking process.
+
+### Expected Result
+
+* Booking is created successfully.
+* Confirmation message is displayed.
+
+---
+
+## 8. Payment Flow
+
+### Test Steps
+
+1. Proceed to payment after booking.
+2. Complete the payment process.
+
+### Expected Result
+
+* Payment is successful.
+* User is redirected to the payment success page.
+* Booking status is updated.
+
+---
+
+## 9. View My Bookings
+
+### Test Steps
+
+1. Open the My Bookings page.
+
+### Expected Result
+
+* User can view all bookings made from their account.
+
+---
+
+## 10. View Tickets
+
+### Test Steps
+
+1. Open the Tickets page after successful booking.
+
+### Expected Result
+
+* Generated ticket is displayed.
+* Ticket contains booking and event information.
+
+---
+
+## 11. Cancel Event
+
+### Test Steps
+
+1. Log in as an Organizer.
+2. Open one of the created events.
+3. Click Cancel Event.
+
+### Expected Result
+
+* Event status changes to CANCELLED.
+* Associated tickets become invalid.
+
+---
+
+## 12. Revenue Report
+
+### Test Steps
+
+1. Open the Revenue section for an event.
+
+### Expected Result
+
+* Total confirmed bookings are displayed.
+* Revenue amount is calculated correctly.
+
+---
+
+## Successful Test Criteria
+
+The application passes testing if:
+
+* Users can register and log in.
+* Organizers can create and manage events.
+* Attendees can book events and make payments.
+* Tickets are generated correctly.
+* Revenue reports display accurate information.
+* Validation and authorization rules are enforced.
+* No unhandled server errors occur during normal usage.
+
+
+---
+#API Testing
+
+1. Open Swagger documentation:
+
+    http://127.0.0.1:8000/swagger/
+2. Authenticate using a valid user account.
+3. Test Event APIs:
+    List Events
+    Create Event
+    Update Event
+    Cancel Event
+4. Test Booking APIs.
+5. Test Revenue APIs.
+6. Verify that unauthorized requests are rejected.
+
+
+# License
+
+This project is developed for learning and educational purposes.

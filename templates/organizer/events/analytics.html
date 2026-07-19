@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analytics
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>
+
+        {{ event.title }}
+
+    </h2>
+
+    <div class="row mt-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h5>Total Bookings</h5>
+
+                    <h2>
+                        {{ total_bookings }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h5>Confirmed</h5>
+
+                    <h2>
+                        {{ confirmed_bookings }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h5>Tickets Sold</h5>
+
+                    <h2>
+                        {{ tickets_sold }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h5>Revenue</h5>
+
+                    <h2>
+                        ₹{{ revenue }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

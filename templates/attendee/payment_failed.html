@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+Payment Failed
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+```
+<div class="card shadow border-danger">
+
+    <div class="card-body text-center">
+
+        <h2 class="text-danger">
+
+            Payment Failed
+
+        </h2>
+
+        <hr>
+
+        <p>
+
+            Your booking remains in failed state.
+
+        </p>
+
+        <p>
+
+            You may retry the payment.
+
+        </p>
+
+        <a
+            href="/my-bookings/"
+            class="btn btn-warning"
+        >
+            Go To My Bookings
+        </a>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

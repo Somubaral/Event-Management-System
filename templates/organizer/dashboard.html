@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block title %}
+Organizer Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+```
+<div class="mb-4">
+
+    <h2 class="fw-bold">
+        Organizer Dashboard
+    </h2>
+
+    <p class="text-muted">
+        Manage venues, events, bookings, revenue and ticket verification.
+    </p>
+
+</div>
+
+<!-- Stats Row -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Total Events
+                </h6>
+
+                <h2>
+                    {{ events.count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Total Bookings
+                </h6>
+
+                <h2>
+                    {{ total_bookings }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Revenue
+                </h6>
+
+                <h2>
+                    ₹{{ total_revenue }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Active Events
+                </h6>
+
+                <h2>
+                    {{ events.count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Quick Actions -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body">
+
+                <h5>
+                    Venue Management
+                </h5>
+
+                <p class="text-muted">
+                    Create and manage venues.
+                </p>
+
+                <a
+                    href="/organizer/venues/"
+                    class="btn btn-warning"
+                >
+                    Manage Venues
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body">
+
+                <h5>
+                    Event Management
+                </h5>
+
+                <p class="text-muted">
+                    Create and manage events.
+                </p>
+
+                <a
+                    href="/organizer/events/create/"
+                    class="btn btn-primary"
+                >
+                    Create Event
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body">
+
+                <h5>
+                    Ticket Verification
+                </h5>
+
+                <p class="text-muted">
+                    Verify attendee tickets.
+                </p>
+
+                <a
+                    href="/organizer/verify-ticket/"
+                    class="btn btn-success"
+                >
+                    Verify Ticket
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Events Table -->
+
+<div class="card shadow">
+
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+
+        <span>
+            My Events
+        </span>
+
+        <a
+            href="/organizer/events/create/"
+            class="btn btn-light btn-sm"
+        >
+            Create Event
+        </a>
+
+    </div>
+
+    <div class="card-body p-0">
+
+        <table class="table table-hover mb-0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Event</th>
+                    <th>Venue</th>
+                    <th>Status</th>
+                    <th>Start Time</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for event in events %}
+
+                <tr>
+
+                    <td>
+                        {{ event.title }}
+                    </td>
+
+                    <td>
+                        {{ event.venue.name }}
+                    </td>
+
+                    <td>
+
+                        {% if event.status == "ACTIVE" %}
+
+                            <span class="badge bg-success">
+                                Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                Cancelled
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ event.start_time }}
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex flex-wrap gap-1">
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/bookings/"
+                                class="btn btn-primary btn-sm"
+                            >
+                                Bookings
+                            </a>
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/revenue/"
+                                class="btn btn-success btn-sm"
+                            >
+                                Revenue
+                            </a>
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/tickets/"
+                                class="btn btn-warning btn-sm"
+                            >
+                                Tickets
+                            </a>
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/edit/"
+                                class="btn btn-info btn-sm"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/analytics/"
+                                class="btn btn-dark btn-sm"
+                            >
+                                Analytics
+                            </a>
+
+                            <a
+                                href="/organizer/event/{{ event.id }}/cancel/"
+                                class="btn btn-danger btn-sm"
+                            >
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5" class="text-center py-4">
+
+                        No events found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

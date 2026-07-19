@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Venue
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Create Venue</h2>
+
+    <form id="venueForm">
+
+        <div class="mb-3">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+            >
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Location</label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="location"
+                required
+            >
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Capacity</label>
+
+            <input
+                type="number"
+                class="form-control"
+                id="capacity"
+                required
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-success"
+        >
+            Save Venue
+        </button>
+
+    </form>
+
+</div>
+
+<script src="/static/js/auth/api.js"></script>
+
+<script>
+
+document
+.getElementById("venueForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const payload = {
+
+        name:
+            document.getElementById("name").value,
+
+        location:
+            document.getElementById("location").value,
+
+        capacity:
+            document.getElementById("capacity").value
+    };
+
+    const response = await fetch(
+        "/api/venues/",
+        {
+            method:"POST",
+
+            headers: authHeaders(),
+
+            body: JSON.stringify(payload)
+        }
+    );
+
+    const result = await response.json();
+
+    if(result.success){
+
+        alert(
+            "Venue created successfully"
+        );
+
+        window.location =
+            "/organizer/venues/";
+    }
+    else{
+
+        alert(
+            result.message
+        );
+    }
+
+});
+
+</script>
+
+{% endblock %}

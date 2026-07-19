@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+Venue Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+            Venue Management
+        </h2>
+
+        <div>
+
+            <a
+                href="{% url 'create-venue' %}"
+                class="btn btn-success"
+            >
+                Create Venue
+            </a>
+
+            <a
+                href="{% url 'venue-availability-page' %}"
+                class="btn btn-primary"
+            >
+                Check Availability
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-header">
+
+            All Venues
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Capacity</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for venue in venues %}
+
+                    <tr>
+
+                        <td>{{ venue.id }}</td>
+                        <td>{{ venue.name }}</td>
+                        <td>{{ venue.address }}</td>
+                        <td>{{ venue.capacity }}</td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            No venues found
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
